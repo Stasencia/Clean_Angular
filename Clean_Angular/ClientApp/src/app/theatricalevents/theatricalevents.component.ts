@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TheatricaleventsService } from '../theatricalevents.service';
-import { TheatricalEvent } from '../theatricalevent';
+import { TheatricaleventsService } from '../services/theatricalevents.service';
+import { TheatricalEvent } from '../models/theatricalevent';
 
 @Component({
   selector: 'app-theatricalevents',
@@ -10,7 +10,7 @@ import { TheatricalEvent } from '../theatricalevent';
 })
 export class TheatricaleventsComponent implements OnInit {
 
-    theatricalevent: TheatricalEvent = new TheatricalEvent();  
+    theatricalevent: TheatricalEvent;  
     theatricalevents: TheatricalEvent[];         
     tableMode: boolean = true;  
 
@@ -55,7 +55,7 @@ export class TheatricaleventsComponent implements OnInit {
         this.theatricalevent = te;
     }
     cancel() {
-        this.theatricalevent = new TheatricalEvent();
+        this.theatricalevent = null;
         this.tableMode = true;
     }
     delete(te: TheatricalEvent) {

@@ -67,7 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\theatricalevent.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\theatricalevent.ts" />
     <TypeScriptCompile Include="ClientApp\src\timePipe.ts" />
   </ItemGroup>
 

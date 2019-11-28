@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TheatricalEvent } from './theatricalevent';
+import { TheatricalEvent } from '../models/theatricalevent';
 
 @Injectable({
   providedIn: 'root'
