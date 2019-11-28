@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TheatricaleventsComponent } from './theatricalevents.component';
+import { AdminAfishaComponent } from './admin-afisha.component';
 
-describe('TheatricaleventsComponent', () => {
-  let component: TheatricaleventsComponent;
-  let fixture: ComponentFixture<TheatricaleventsComponent>;
+describe('AdminAfishaComponent', () => {
+  let component: AdminAfishaComponent;
+  let fixture: ComponentFixture<AdminAfishaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TheatricaleventsComponent ]
+      declarations: [ AdminAfishaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TheatricaleventsComponent);
+    fixture = TestBed.createComponent(AdminAfishaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,9 +5,9 @@ import { TheatricalEvent } from '../models/theatricalevent';
 @Injectable({
   providedIn: 'root'
 })
-export class TheatricaleventsService {
+export class AdminAfishaService {
 
-    private url = "/api/theatricalevents";
+    private url = "/api/admin-afisha";
 
     constructor(private http: HttpClient) {
     }

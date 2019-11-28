@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { TheatricaleventsService } from '../services/theatricalevents.service';
+import { AdminAfishaService } from '../services/admin-afisha.service';
 import { TheatricalEvent } from '../models/theatricalevent';
 
 @Component({
-  selector: 'app-theatricalevents',
-  templateUrl: './theatricalevents.component.html',
-    styleUrls: ['./theatricalevents.component.css'],
-    providers: [TheatricaleventsService]
+    selector: 'app-admin-afisha',
+    templateUrl: './admin-afisha.component.html',
+    styleUrls: ['./admin-afisha.component.css'],
+    providers: [AdminAfishaService]
 })
-export class TheatricaleventsComponent implements OnInit {
+export class AdminAfishaComponent implements OnInit {
 
-    theatricalevent: TheatricalEvent;  
-    theatricalevents: TheatricalEvent[];         
-    tableMode: boolean = true;  
+    theatricalevent: TheatricalEvent;
+    theatricalevents: TheatricalEvent[];
+    tableMode: boolean = true;
 
-    constructor(private dataService: TheatricaleventsService) { }
+    constructor(private dataService: AdminAfishaService) { }
 
     ngOnInit() {
-        this.loadTheatricalEvents();  
+        this.loadTheatricalEvents();
     }
 
     changeListener($event): void {

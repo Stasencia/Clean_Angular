@@ -12,7 +12,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { TheatricaleventsComponent } from './theatricalevents/theatricalevents.component';
+import { AdminAfishaComponent } from './admin-afisha/admin-afisha.component';
+import { AfishaComponent } from './afisha/afisha.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TheatricaleventsComponent } from './theatricalevents/theatricalevents.c
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    TheatricaleventsComponent
+    AdminAfishaComponent,
+    AfishaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +34,7 @@ import { TheatricaleventsComponent } from './theatricalevents/theatricalevents.c
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'theatricalevents', component: TheatricaleventsComponent },
+      { path: 'admin-afisha', component: AdminAfishaComponent },
     ])
   ],
   providers: [
