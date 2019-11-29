@@ -1,26 +1,33 @@
 <script src="moment.js"></script>
 <h1>Список представлений</h1>
-<table *ngIf="tableMode; else create" class="table table-striped">
+<table *ngIf="tableMode; else create" class="table">
   <thead>
     <tr>
-      <td>Название</td>
       <td>Картинка</td>
-      <td>Описание</td>
-      <td>Продолжительность</td>
+      <td>Название/Описание</td>
       <td></td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let te of theatricalevents">
-        <td>{{te?.name}}</td>
-        <td>
-          <img src="{{'data:image/jpg;base64,' + te?.image}}" />
-        </td>
-        <td>{{te?.description}}</td>
-        <td>{{te?.duration | date:'hh:mm'}}</td>
-        <td>
-          <button class="btn btn-sm btn-primary" (click)="editTheatricalEvent(te)">Купить билет</button>
-        </td>
+      <td width="220px">
+        <img src="{{'data:image/jpg;base64,' + te?.image}}" />
+      </td>
+      <td width="60%">
+        <div>
+          <table class="table">
+            <tr>
+              Название: {{te?.name}}
+            </tr>
+            <tr>
+              Описание: {{te?.description}}
+            </tr>
+          </table>
+        </div>
+      </td>
+      <td style="vertical-align:middle">
+        <button class="btn btn-primary" (click)="editTheatricalEvent(te)">Купить билет</button>
+      </td>
     </tr>
   </tbody>
 </table>
