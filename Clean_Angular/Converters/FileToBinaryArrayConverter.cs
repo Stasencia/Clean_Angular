@@ -22,7 +22,6 @@ namespace ANGULARRRR.Converters
         public override void Write(Utf8JsonWriter writer, byte[] value, JsonSerializerOptions options)
         {
             writer.WriteBase64StringValue(value);
-            //writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"));
         }
     }
 }

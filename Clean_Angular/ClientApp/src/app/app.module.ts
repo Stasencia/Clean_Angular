@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -26,16 +27,18 @@ import { AfishaComponent } from './afisha/afisha.component';
     AfishaComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'admin-afisha', component: AdminAfishaComponent },
-    ])
+      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+      Ng2ImgMaxModule,
+      HttpClientModule,
+      FormsModule,
+      ApiAuthorizationModule,
+      RouterModule.forRoot([
+          { path: '', component: HomeComponent, pathMatch: 'full' },
+          { path: 'counter', component: CounterComponent },
+          { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+          { path: 'admin-afisha', component: AdminAfishaComponent, canActivate: [AuthorizeGuard] },
+          { path: 'afisha', component: AfishaComponent, canActivate: [AuthorizeGuard] },
+      ])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

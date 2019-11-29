@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ANGULARRRR.Controllers
 {
+    [Authorize]
     [Route("api/admin-afisha")]
     [ApiController]
     public class AdminAfishaController : ControllerBase

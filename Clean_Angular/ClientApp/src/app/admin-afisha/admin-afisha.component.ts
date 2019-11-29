@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminAfishaService } from '../services/admin-afisha.service';
 import { TheatricalEvent } from '../models/theatricalevent';
+import { Ng2ImgMaxService } from 'ng2-img-max';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-admin-afisha',
@@ -14,7 +16,10 @@ export class AdminAfishaComponent implements OnInit {
     theatricalevents: TheatricalEvent[];
     tableMode: boolean = true;
 
-    constructor(private dataService: AdminAfishaService) { }
+    constructor(private dataService: AdminAfishaService,
+        private ng2ImgMax: Ng2ImgMaxService,
+        public sanitizer: DomSanitizer
+    ) { }
 
     ngOnInit() {
         this.loadTheatricalEvents();
@@ -26,15 +31,28 @@ export class AdminAfishaComponent implements OnInit {
 
     readThis(inputValue: any): void {
         var file: File = inputValue.files[0];
-        var myReader: FileReader = new FileReader();
+        var resizedimage: File = null;
 
-        myReader.onloadend = (e) => {
-            if (myReader.result === 'string')
-                this.theatricalevent.image = myReader.result;
+        this.ng2ImgMax.resizeImage(file, 200, 200).subscribe(
+            result => {
+                resizedimage = new File([result], result.name);
+                this.getImagePreview(resizedimage);
+            },
+            error => {
+                console.log('image resizing failed', error);
+            }
+        );
+    }
+
+    getImagePreview(file: File) {
+        const reader: FileReader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            if (reader.result === 'string')
+                this.theatricalevent.image = reader.result;
             else
-                this.theatricalevent.image = myReader.result.toString();
-        }
-        myReader.readAsDataURL(file);
+                this.theatricalevent.image = reader.result.toString();
+        };
     }
 
     loadTheatricalEvents() {

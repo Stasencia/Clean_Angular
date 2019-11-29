@@ -44,9 +44,17 @@ export class AuthorizeService {
   private userManager: UserManager;
   private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject(null);
 
-  public isAuthenticated(): Observable<boolean> {
-    return this.getUser().pipe(map(u => !!u));
-  }
+    public isAuthenticated(): Observable<boolean> {
+        /*var x: Observable<string> = this.getUser().pipe(map(u => u.name));
+        var y: Observable<User> = from(this.ensureUserManagerInitialized())
+                                .pipe(mergeMap(() => this.userManager.getUser()));
+        var y: Observable<any> = from(this.ensureUserManagerInitialized())
+            .pipe(
+                mergeMap(() => this.userManager.getUser()),
+                map(u => u && u.profile));*/
+
+        return this.getUser().pipe(map(u => !!u));
+    }
 
   public getUser(): Observable<IUser | null> {
     return concat(
@@ -71,7 +79,7 @@ export class AuthorizeService {
   //    redirect flow.
   public async signIn(state: any): Promise<IAuthenticationResult> {
     await this.ensureUserManagerInitialized();
-    let user: User = null;
+      let user: User = null;
     try {
       user = await this.userManager.signinSilent(this.createArguments());
       this.userSubject.next(user.profile);
