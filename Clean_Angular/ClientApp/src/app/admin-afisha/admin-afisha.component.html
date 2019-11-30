@@ -1,25 +1,34 @@
 <script src="moment.js"></script>
 <h1>Список представлений</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
-<table *ngIf="tableMode; else create" class="table table-striped">
+<table *ngIf="tableMode; else create" class="table ">
   <thead>
     <tr>
-      <td>Название</td>
-      <td>Описание</td>
-      <td>Продолжительность</td>
       <td>Картинка</td>
+      <td>Название / Описание</td>
+      <td>Продолжительность</td>
       <td></td>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let te of theatricalevents">
+    <tr *ngFor="let te of pageOfTheatricalevents" style="height:220px">
       <ng-template [ngIf]="theatricalevent?.id != te.id" [ngIfElse]="edit">
-        <td>{{te?.name}}</td>
-        <td>{{te?.description}}</td>
-        <td>{{te?.duration | date:'hh:mm'}}</td>
-        <td>
-          <img src="{{'data:image/jpg;base64,' + te?.image}}"/>
+        <td width="220px">
+          <img src="{{'data:image/jpg;base64,' + te?.image}}" />
         </td>
+        <td width="50%">
+          <div>
+            <table class="table">
+              <tr>
+                Название: {{te?.name}}
+              </tr>
+              <tr>
+                Описание: {{te?.description}}
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td>{{te?.duration | date:'hh:mm'}}</td>
         <td>
           <button class="btn btn-sm btn-primary" (click)="editTheatricalEvent(te)">Изменить</button>
           <button class="btn btn-sm btn-danger" (click)="delete(te)">Удалить</button>
@@ -28,21 +37,22 @@
     </tr>
   </tbody>
 </table>
+<div style="width:40%;margin:auto">
+  <jw-pagination [items]="theatricalevents" (changePage)="onChangePage($event)" pageSize="5"></jw-pagination>
+</div>
 
 <!--шаблон для редактирования-->
 <ng-template #edit>
   <td>
-    <input type="text" [(ngModel)]="theatricalevent.name" class="form-control" />
+    <input #fileInput id="fileInput" type='file' (change)="changeListener($event)" class="form-control" />
   </td>
-  <td>
-    <input type="text" [(ngModel)]="theatricalevent.description" class="form-control" />
+  <td width="50%">
+    <input type="text" [(ngModel)]="theatricalevent.name" class="form-control" />
+    <textarea [(ngModel)]="theatricalevent.description" class="form-control" cols="40" rows="5"></textarea>
   </td>
   <td>
     <input type="time" [ngModel]="theatricalevent.duration |  date:'hh:mm'"
            (ngModelChange)="theatricalevent.duration=$event" name="duration" />
-  </td>
-  <td>
-    <input #fileInput id="fileInput" type='file' (change)="changeListener($event)" class="form-control" />
   </td>
   <td>
     <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
@@ -58,11 +68,15 @@
   </div>
   <div class="form-group">
     <label>Описание</label>
-    <input type="text" [(ngModel)]="theatricalevent.description" class="form-control" />
+    <textarea [(ngModel)]="theatricalevent.description" class="form-control" cols="40" rows="5"></textarea>
   </div>
   <div class="form-group">
     <label>Продолжительность</label>
     <input type="time" [(ngModel)]="theatricalevent.duration" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Картинка</label>
+    <input type="file" [(ngModel)]="theatricalevent.image" class="form-control">
   </div>
   <div>
     <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />

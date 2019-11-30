@@ -13,7 +13,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AdminAfishaComponent implements OnInit {
 
     theatricalevent: TheatricalEvent;
+    // array of all items to be paged
     theatricalevents: TheatricalEvent[];
+    // current page of items
+    pageOfTheatricalevents: TheatricalEvent[];
     tableMode: boolean = true;
 
     constructor(private dataService: AdminAfishaService,
@@ -47,7 +50,7 @@ export class AdminAfishaComponent implements OnInit {
     getImagePreview(file: File) {
         const reader: FileReader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => {
+        reader.onloadend = () => {
             if (reader.result === 'string')
                 this.theatricalevent.image = reader.result;
             else
@@ -59,6 +62,12 @@ export class AdminAfishaComponent implements OnInit {
         this.dataService.getTheatricalEvents()
             .subscribe((data: TheatricalEvent[]) => this.theatricalevents = data);
     }
+
+    onChangePage(pageOfItems: Array<any>) {
+        // update current page of items
+        this.pageOfTheatricalevents = pageOfItems;
+    }
+
     save() {
         if (this.theatricalevent.id == null) {
             this.dataService.createTheatricalEvent(this.theatricalevent)
@@ -84,5 +93,4 @@ export class AdminAfishaComponent implements OnInit {
         this.cancel();
         this.tableMode = false;
     }
-
 }

@@ -7,6 +7,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
@@ -16,15 +17,17 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { AdminAfishaComponent } from './admin-afisha/admin-afisha.component';
 import { AfishaComponent } from './afisha/afisha.component';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    AdminAfishaComponent,
-    AfishaComponent
+      AppComponent,
+      NavMenuComponent,
+      JwPaginationComponent,
+      HomeComponent,
+      CounterComponent,
+      FetchDataComponent,
+      AdminAfishaComponent,
+      AfishaComponent
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
