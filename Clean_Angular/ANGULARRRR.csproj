@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\scheduledevent.ts" />
     <None Remove="ClientApp\src\app\theatricalevent.ts" />
     <None Remove="ClientApp\src\timePipe.ts" />
   </ItemGroup>
@@ -67,6 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\scheduledevent.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\theatricalevent.ts" />
     <TypeScriptCompile Include="ClientApp\src\timePipe.ts" />
   </ItemGroup>
