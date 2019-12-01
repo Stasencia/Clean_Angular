@@ -38,9 +38,18 @@ export class AdminAfishaScheduleComponent implements OnInit {
         this.dataService.getScheduledEvent(id)
             .subscribe((data: ScheduledEvent) => {
                 this.scheduledevent = data;
-                  this.datesSelected = data.date.map(function (x) {
-                      return { year: x.getFullYear(), month: x.getMonth() + 1, day: x.getDate() }
-                  });
+                if (data.dates) {
+                    
+                    this.datesSelected = data.dates.map(function (x) {
+                        x = new Date(x);
+                        return { year: x.getFullYear(), month: x.getMonth() + 1, day: x.getDate() }
+                    });  
+                }
+                /*for (var i = 0; i < data.dates.length; i++) {
+                    var x = new Date(data.dates[i]);
+                    var y = x.getUTCFullYear();
+                    this.datesSelected.push({ year: x.getFullYear(), month: x.getMonth() + 1, day: x.getDate() });
+                }*/
             });
     }
 
