@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let te of theatricalevents">
+    <tr *ngFor="let te of pageOfTheatricalevents">
       <td width="220px">
         <img src="{{'data:image/jpg;base64,' + te?.image}}" />
       </td>
@@ -31,3 +31,6 @@
     </tr>
   </tbody>
 </table>
+<div style="width:30%;margin:auto">
+  <jw-pagination [items]="theatricalevents" (changePage)="onChangePage($event)" pageSize="1"></jw-pagination>
+</div>

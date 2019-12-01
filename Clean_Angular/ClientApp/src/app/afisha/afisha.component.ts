@@ -12,6 +12,7 @@ export class AfishaComponent implements OnInit {
 
     theatricalevent: TheatricalEvent;
     theatricalevents: TheatricalEvent[];
+    pageOfTheatricalevents: TheatricalEvent[];
     tableMode: boolean = true;
 
     constructor(private dataService: AfishaService) { }
@@ -23,6 +24,11 @@ export class AfishaComponent implements OnInit {
     loadTheatricalEvents() {
         this.dataService.getTheatricalEvents()
             .subscribe((data: TheatricalEvent[]) => this.theatricalevents = data);
+    }
+
+    onChangePage(pageOfItems: Array<any>) {
+        // update current page of items
+        this.pageOfTheatricalevents = pageOfItems;
     }
 
 }
