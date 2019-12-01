@@ -22,23 +22,22 @@ namespace ANGULARRRR.Controllers
         [HttpGet("{id}")]
         public ScheduledEventDTO Get(int id)
         {
-            ScheduledEvent scheduledEvent = db.ScheduledEvents.FirstOrDefault(x => x.TheatricalEventId == id);
-            if(scheduledEvent == null)
-            {
-                scheduledEvent = new ScheduledEvent()
-                {
-                    TheatricalEvent = db.TheatricalEvents.Find(id)
-                };
-
-            }
+            TheatricalEvent theatricalEvent = db.TheatricalEvents.Find(id);
 
             ScheduledEventDTO scheduledEventDto = new ScheduledEventDTO()
             {
-                Id = scheduledEvent.Id,
-                TheatricalEventId = scheduledEvent.TheatricalEventId,
-                Name = scheduledEvent.TheatricalEvent.Name,
-                Image = scheduledEvent.TheatricalEvent.Image
+                TheatricalEventId = theatricalEvent.Id,
+                Name = theatricalEvent.Name,
+                Image = theatricalEvent.Image
             };
+
+            IQueryable<ScheduledEvent> scheduledEvents = db.ScheduledEvents.Where(x => x.TheatricalEventId == id);
+
+            if (scheduledEvents.Any())
+            {
+                scheduledEventDto.Dates = scheduledEvents.Select(x => x.Date).ToArray();
+            }
+            
             return scheduledEventDto;
         }
     }

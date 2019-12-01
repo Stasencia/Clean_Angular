@@ -3,7 +3,6 @@ import { AdminAfishaService } from '../services/admin-afisha.service';
 import { TheatricalEvent } from '../models/theatricalevent';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-admin-afisha',
@@ -19,7 +18,6 @@ export class AdminAfishaComponent implements OnInit {
     // current page of items
     pageOfTheatricalevents: TheatricalEvent[];
     tableMode: boolean = true;
-    datesSelected: NgbDateStruct[] = [];
 
     constructor(private dataService: AdminAfishaService,
         private ng2ImgMax: Ng2ImgMaxService,
@@ -32,10 +30,6 @@ export class AdminAfishaComponent implements OnInit {
 
     changeListener($event): void {
         this.readThis($event.target);
-    }
-
-    change(value: NgbDateStruct[]) {
-        this.datesSelected = value;
     }
 
     readThis(inputValue: any): void {

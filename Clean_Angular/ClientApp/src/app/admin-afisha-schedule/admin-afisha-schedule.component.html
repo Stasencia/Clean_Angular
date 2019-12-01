@@ -1,4 +1,4 @@
-<h1>{{scheduledevent?.name}}</h1>
+<h1>Представление: {{scheduledevent?.name}}</h1>
 <img src="{{'data:image/jpg;base64,' + scheduledevent?.image}}" />
-
+<h3>Введите данные про даты проведения представления в календарь:</h3>
 <app-multi-date-picker [datesSelected]="datesSelected" (datesSelectedChange)="change($event)"></app-multi-date-picker>

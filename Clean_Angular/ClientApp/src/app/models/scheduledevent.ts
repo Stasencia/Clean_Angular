@@ -4,6 +4,6 @@ export class ScheduledEvent {
         public theatricaleventid?: number,
         public name?: string,
         public image?: string,
-        public date?: Date
+        public date?: Date[]
         ) { }
 }

@@ -7,9 +7,9 @@ namespace ANGULARRRR.DTOs
 {
     public class ScheduledEventDTO
     {
-        public int Id { get; set; }
         public int TheatricalEventId { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
+        public DateTime[] Dates { get; set; }
     }
 }
