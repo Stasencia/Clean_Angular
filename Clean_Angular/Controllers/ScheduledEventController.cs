@@ -23,6 +23,15 @@ namespace ANGULARRRR.Controllers
         public ScheduledEventDTO Get(int id)
         {
             ScheduledEvent scheduledEvent = db.ScheduledEvents.FirstOrDefault(x => x.TheatricalEventId == id);
+            if(scheduledEvent == null)
+            {
+                scheduledEvent = new ScheduledEvent()
+                {
+                    TheatricalEvent = db.TheatricalEvents.Find(id)
+                };
+
+            }
+
             ScheduledEventDTO scheduledEventDto = new ScheduledEventDTO()
             {
                 Id = scheduledEvent.Id,

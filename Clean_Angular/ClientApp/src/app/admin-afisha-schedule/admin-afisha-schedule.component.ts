@@ -10,11 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AdminAfishaScheduleComponent implements OnInit {
 
+    bookstore = {
+        id: 0,
+    };
     scheduledevent: ScheduledEvent;
 
     constructor(private route: ActivatedRoute, private router: Router, private dataService: ScheduleService) {
         route.params.subscribe(p => {
-            this.scheduledevent.id = +p['id'];
+            this.bookstore.id = +p['id'];
         }, err => {
             if (err.status == 404)
                 this.router.navigate(['/admin-afisha']);
@@ -22,7 +25,7 @@ export class AdminAfishaScheduleComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getScheduledEvent(this.scheduledevent.id);
+        this.getScheduledEvent(this.bookstore.id);
     }
 
     getScheduledEvent(id: number) {

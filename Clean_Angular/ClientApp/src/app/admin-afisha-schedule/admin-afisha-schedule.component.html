@@ -1,3 +1,4 @@
 <h1>{{scheduledevent?.name}}</h1>
+<img src="{{'data:image/jpg;base64,' + scheduledevent?.image}}" />
 
 <app-multi-date-picker [datesSelected]="datesSelected" (datesSelectedChange)="change($event)"></app-multi-date-picker>
