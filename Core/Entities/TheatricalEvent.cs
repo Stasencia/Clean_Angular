@@ -13,5 +13,6 @@ namespace Core.Entities
         public string Description { get; set; }
         public DateTime Duration { get; set; }
         public byte[] Image { get; set; }
+        public List<ScheduledEvent> ScheduledEvents { get; set; }
     }
 }

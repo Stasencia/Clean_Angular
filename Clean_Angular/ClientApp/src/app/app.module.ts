@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -16,6 +17,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { AdminAfishaComponent } from './admin-afisha/admin-afisha.component';
 import { AfishaComponent } from './afisha/afisha.component';
+import { MultiDatePickerComponent } from './multi-date-picker/multi-date-picker.component';
+import { AdminAfishaScheduleComponent } from './admin-afisha-schedule/admin-afisha-schedule.component';
 
 
 @NgModule({
@@ -27,11 +30,14 @@ import { AfishaComponent } from './afisha/afisha.component';
       CounterComponent,
       FetchDataComponent,
       AdminAfishaComponent,
-      AfishaComponent
+      AfishaComponent,
+      MultiDatePickerComponent,
+      AdminAfishaScheduleComponent
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
       Ng2ImgMaxModule,
+      NgbModule,
       HttpClientModule,
       FormsModule,
       ApiAuthorizationModule,
@@ -40,6 +46,7 @@ import { AfishaComponent } from './afisha/afisha.component';
           { path: 'counter', component: CounterComponent },
           { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
           { path: 'admin-afisha', component: AdminAfishaComponent, canActivate: [AuthorizeGuard] },
+          { path: 'admin-afisha/schedule/:id', component: AdminAfishaComponent },
           { path: 'afisha', component: AfishaComponent, canActivate: [AuthorizeGuard] },
       ])
   ],

@@ -14,6 +14,7 @@ namespace Infrastructure.Data
     {
 
         public DbSet<TheatricalEvent> TheatricalEvents { get; set; }
+        public DbSet<ScheduledEvent> ScheduledEvents { get; set; }
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

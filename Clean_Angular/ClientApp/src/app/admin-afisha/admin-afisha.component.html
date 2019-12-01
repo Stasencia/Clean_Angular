@@ -7,6 +7,7 @@
       <td>Картинка</td>
       <td>Название / Описание</td>
       <td>Продолжительность</td>
+      <td>Даты</td>
       <td></td>
     </tr>
   </thead>
@@ -29,6 +30,9 @@
           </div>
         </td>
         <td>{{te?.duration | date:'hh:mm'}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" [routerLink]="['/admin-afisha/schedule/', te?.id]">Изменить</button>
+        </td>
         <td>
           <button class="btn btn-sm btn-primary" (click)="editTheatricalEvent(te)">Изменить</button>
           <button class="btn btn-sm btn-danger" (click)="delete(te)">Удалить</button>
