@@ -25,7 +25,7 @@ export class MultiDatePickerComponent{
     toDate: NgbDateStruct;
 
     _datesSelected: NgbDateStruct[] = [];
-
+   
     @Input()
     set datesSelected(value: NgbDateStruct[]) {
         this._datesSelected = value;
