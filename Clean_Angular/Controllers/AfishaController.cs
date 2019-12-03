@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ANGULARRRR.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AfishaController : ControllerBase

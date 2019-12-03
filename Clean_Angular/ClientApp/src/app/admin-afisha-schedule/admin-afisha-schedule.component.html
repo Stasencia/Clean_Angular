@@ -2,5 +2,5 @@
 <img src="{{'data:image/jpg;base64,' + scheduledevent?.image}}" />
 <h3>Даты проведения представления</h3>
 <app-multi-date-picker [datesSelected]="datesSelected" (datesSelectedChange)="change($event)"></app-multi-date-picker>
-<input placeholder="24hr format" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24" readonly>
-<ngx-material-timepicker #fullTime></ngx-material-timepicker>
+<h2></h2>
+<button class="btn btn-sm btn-primary" (click)="saveDates()">Сохранить</button>

@@ -52,5 +52,12 @@ export class AdminAfishaScheduleComponent implements OnInit {
                 }*/
             });
     }
-
+    saveDates() {
+        this.scheduledevent.dates = this.datesSelected.map(function (x) {
+            var d = new Date(x.year, x.month - 1, x.day);
+            return d;
+        });
+        this.dataService.createScheduledEvent(this.scheduledevent)
+            .subscribe((data: ScheduledEvent) => this.getScheduledEvent(data.id));;
+    }
 }

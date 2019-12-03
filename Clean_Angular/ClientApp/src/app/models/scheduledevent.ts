@@ -5,5 +5,5 @@ export class ScheduledEvent {
         public name?: string,
         public image?: string,
         public dates?: Date[]
-        ) { }
+    ) { }
 }

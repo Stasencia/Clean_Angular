@@ -40,5 +40,39 @@ namespace ANGULARRRR.Controllers
             
             return scheduledEventDto;
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]ScheduledEventDTO scheduledEventDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var scheduledEvents = db.ScheduledEvents
+                    .Where(x => x.TheatricalEventId == scheduledEventDTO.TheatricalEventId);
+                var old_scheduledEvents = scheduledEvents
+                                .Where(x => !scheduledEventDTO.Dates.Contains(x.Date));
+                var new_scheduledEvents = scheduledEventDTO.Dates.Except(scheduledEvents.Select(x => x.Date));
+
+                if (old_scheduledEvents.Any())
+                {
+                    db.ScheduledEvents.RemoveRange(old_scheduledEvents);
+                }
+
+                if (new_scheduledEvents.Any())
+                {
+                    foreach (DateTime d in new_scheduledEvents)
+                    {
+                        ScheduledEvent scheduledEvent = new ScheduledEvent()
+                        {
+                            TheatricalEventId = scheduledEventDTO.TheatricalEventId,
+                            Date = d
+                        };
+                        db.ScheduledEvents.Add(scheduledEvent);
+                    }
+                }
+                db.SaveChanges();
+                return Ok(scheduledEventDTO);
+            }
+            return BadRequest(ModelState);
+        }
     }
 }
