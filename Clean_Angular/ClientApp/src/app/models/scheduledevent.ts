@@ -1,9 +1,9 @@
+import { TheatricalEvent } from "./theatricalevent";
+
 export class ScheduledEvent {
     constructor(
         public id?: number,
-        public theatricaleventid?: number,
-        public name?: string,
-        public image?: string,
+        public theatricalEvent?: TheatricalEvent,
         public dates?: Date[]
     ) { }
 }

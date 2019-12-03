@@ -1,11 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ScheduledEvent = /** @class */ (function () {
-    function ScheduledEvent(id, theatricaleventid, name, image, dates) {
+    function ScheduledEvent(id, theatricalEvent, dates) {
         this.id = id;
-        this.theatricaleventid = theatricaleventid;
-        this.name = name;
-        this.image = image;
+        this.theatricalEvent = theatricalEvent;
         this.dates = dates;
     }
     return ScheduledEvent;

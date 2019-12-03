@@ -26,9 +26,10 @@ namespace ANGULARRRR.Controllers
 
             ScheduledEventDTO scheduledEventDto = new ScheduledEventDTO()
             {
-                TheatricalEventId = theatricalEvent.Id,
+                /*TheatricalEventId = theatricalEvent.Id,
                 Name = theatricalEvent.Name,
-                Image = theatricalEvent.Image
+                Image = theatricalEvent.Image*/
+                TheatricalEvent = theatricalEvent
             };
 
             IQueryable<ScheduledEvent> scheduledEvents = db.ScheduledEvents.Where(x => x.TheatricalEventId == id);
@@ -47,7 +48,7 @@ namespace ANGULARRRR.Controllers
             if (ModelState.IsValid)
             {
                 var scheduledEvents = db.ScheduledEvents
-                    .Where(x => x.TheatricalEventId == scheduledEventDTO.TheatricalEventId);
+                    .Where(x => x.TheatricalEventId == scheduledEventDTO.TheatricalEvent.Id);
                 var old_scheduledEvents = scheduledEvents
                                 .Where(x => !scheduledEventDTO.Dates.Contains(x.Date));
                 var new_scheduledEvents = scheduledEventDTO.Dates.Except(scheduledEvents.Select(x => x.Date));
@@ -63,7 +64,7 @@ namespace ANGULARRRR.Controllers
                     {
                         ScheduledEvent scheduledEvent = new ScheduledEvent()
                         {
-                            TheatricalEventId = scheduledEventDTO.TheatricalEventId,
+                            TheatricalEventId = scheduledEventDTO.TheatricalEvent.Id,
                             Date = d
                         };
                         db.ScheduledEvents.Add(scheduledEvent);
