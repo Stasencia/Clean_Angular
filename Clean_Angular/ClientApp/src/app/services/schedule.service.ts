@@ -18,10 +18,10 @@ export class ScheduleService {
     createScheduledEvent(scheduledevent: ScheduledEvent) {
         return this.http.post(this.url, scheduledevent);
     }
-    updateScheduledEvent(scheduledevent: ScheduledEvent) {
+    /*updateScheduledEvent(scheduledevent: ScheduledEvent) {
 
         return this.http.put(this.url + '/' + scheduledevent.id, scheduledevent);
-    }
+    }*/
     deleteScheduledEvent(id: number) {
         return this.http.delete(this.url + '/' + id);
     }
