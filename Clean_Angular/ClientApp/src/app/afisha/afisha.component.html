@@ -26,7 +26,7 @@
           </table>
         </div>
       </td>
-      <td>{{getDates(scheduledevent).minDate | date:'shortDate'}} - {{getDates(scheduledevent).maxDate  | date:'shortDate'}}</td>
+      <td>{{getDates(scheduledevent).minDate | date:'dd/MM/yyyy'}} - {{getDates(scheduledevent).maxDate  | date:'dd/MM/yyyy'}}</td>
       <td style="vertical-align:middle">
         <button class="btn btn-primary" (click)="editTheatricalEvent(te)">Купить билет</button>
       </td>
