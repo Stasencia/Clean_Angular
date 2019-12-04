@@ -10,23 +10,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let te of pageOfTheatricalevents">
+    <tr *ngFor="let scheduledevent of pageOfScheduledevents">
       <td width="220px">
-        <img src="{{'data:image/jpg;base64,' + te?.image}}" />
+        <img src="{{'data:image/jpg;base64,' + scheduledevent.theatricalEvent?.image}}" />
       </td>
       <td width="60%">
         <div>
           <table class="table">
             <tr>
-              Название: {{te?.name}}
+              Название: {{scheduledevent.theatricalEvent?.name}}
             </tr>
             <tr>
-              Описание: {{te?.description}}
+              Описание: {{scheduledevent.theatricalEvent?.description}}
             </tr>
           </table>
         </div>
       </td>
-      <td></td>
+      <td>{{getDates(scheduledevent).minDate | date:'shortDate'}} - {{getDates(scheduledevent).maxDate  | date:'shortDate'}}</td>
       <td style="vertical-align:middle">
         <button class="btn btn-primary" (click)="editTheatricalEvent(te)">Купить билет</button>
       </td>
@@ -34,5 +34,5 @@
   </tbody>
 </table>
 <div style="width:30%;margin:auto">
-  <jw-pagination [items]="theatricalevents" (changePage)="onChangePage($event)" pageSize="1"></jw-pagination>
+  <jw-pagination [items]="scheduledevents" (changePage)="onChangePage($event)" pageSize="1"></jw-pagination>
 </div>

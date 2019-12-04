@@ -20,5 +20,15 @@ namespace Infrastructure.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ScheduledEvent>()
+                .HasOne<TheatricalEvent>(e => e.TheatricalEvent)
+                .WithMany(c => c.ScheduledEvents)
+                .HasForeignKey(e => e.TheatricalEventId);
+        }
     }
 }
