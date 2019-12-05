@@ -35,11 +35,10 @@ export class AuthorizeGuard implements CanActivate {
                       console.log(granted_role == role);
                       if (granted_role == role) {
                           isMatch = true;
-                          return false;
                       }
                   });
               });
-              if (!isMatch)
+              if (!isMatch && this.granted_roles.length!=0)
                   alert("You don't have a right to access this page");
               return isMatch;
           }

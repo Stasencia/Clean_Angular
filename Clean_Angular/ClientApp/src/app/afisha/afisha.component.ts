@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { AfishaService } from '../services/afisha.service';
 import { TheatricalEvent } from '../models/theatricalevent';
 import { ScheduledEvent } from '../models/scheduledevent';
@@ -8,7 +9,7 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-b
     selector: 'app-afisha',
     templateUrl: './afisha.component.html',
     styleUrls: ['./afisha.component.css'],
-    providers: [AfishaService]
+    providers: [AfishaService, DatePipe]
 })
 export class AfishaComponent implements OnInit {
 
@@ -26,8 +27,10 @@ export class AfishaComponent implements OnInit {
     fromDate: NgbDate;
     toDate: NgbDate;
 
+    filter: any = {};
+
     constructor(private dataService: AfishaService,
-        private calendar: NgbCalendar, public formatter: NgbDateParserFormatter)
+        private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, public datepipe: DatePipe)
     {
     }
 
@@ -36,7 +39,7 @@ export class AfishaComponent implements OnInit {
     }
 
     loadTheatricalEvents() {
-        this.dataService.getTheatricalEvents()
+        this.dataService.getTheatricalEvents(this.filter)
             .subscribe((data: ScheduledEvent[]) => this.scheduledevents = data);
     }
 
@@ -53,7 +56,19 @@ export class AfishaComponent implements OnInit {
     }
 
     filterAfisha() {
+        var fromDate = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day);
+        var toDate = new Date(this.toDate.year, this.toDate.month - 1, this.toDate.day);
+        this.filter = {
+            "fromDate": this.datepipe.transform(fromDate, "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"),
+            "toDate": this.datepipe.transform(toDate, "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ")
+        };
+        this.loadTheatricalEvents();
+    }
 
+    cancelfilterAfisha() {
+        this.fromDate = this.toDate = undefined;
+        this.filter = {};
+        this.loadTheatricalEvents();
     }
 
     onDateSelection(date: NgbDate) {
