@@ -17,6 +17,7 @@ export class TheatricaleventDetailsComponent implements OnInit {
         id: 0,
     };
     datesSelected: NgbDateStruct[] = [];
+    dateSelected: NgbDateStruct;
 
     constructor(private dataService: AfishaService, private route: ActivatedRoute, private router: Router, private calendar: NgbCalendar) {
         route.params.subscribe(p => {
@@ -28,19 +29,22 @@ export class TheatricaleventDetailsComponent implements OnInit {
     }
 
     isDisabled = (date: NgbDate, current: { month: number }) => date.month !== current.month;
-    isWeekend = (date: NgbDate) => this.datesSelected.includes({ year: date.year, month: date.month, day: date.day });
     isDateSelected(date: NgbDateStruct) {
         return (this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year) >= 0);
     }
-        /*function (date) {
-        this.dateSelected.forEach(element => {
-            if (element == date)
-                return true;
-            else
-                return false;
-        });
-    };*/
-        //this.datesSelected.includes({ year: date.year, month: date.month, day: date.day });
+
+    onDateSelection(date: NgbDateStruct) {
+        this.dateSelected = date;        
+    }
+
+    buyTicket() {
+        if (!this.dateSelected)
+            alert("Выберите подходящую дату.");
+        else if (!(this.datesSelected.findIndex(f => f.day == this.dateSelected.day && f.month == this.dateSelected.month && f.year == this.dateSelected.year) >= 0))
+            alert("Выберите одну из указанных дат. В выбранную вами дату нет представлений.");
+        else
+            this.router.navigate(['/afisha']);
+    }
 
     ngOnInit() {
         this.loadTheatricalEvent(this.event.id);
