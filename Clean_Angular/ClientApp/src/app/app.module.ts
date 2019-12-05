@@ -49,7 +49,7 @@ import { AdminAfishaScheduleComponent } from './admin-afisha-schedule/admin-afis
           { path: '', component: HomeComponent, pathMatch: 'full' },
           { path: 'counter', component: CounterComponent },
           { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-          { path: 'admin-afisha', component: AdminAfishaComponent },
+          { path: 'admin-afisha', component: AdminAfishaComponent, canActivate: [AuthorizeGuard], data: {permittedRoles: ["Administrator"]} },
           { path: 'admin-afisha/schedule/:id', component: AdminAfishaScheduleComponent },
           { path: 'afisha', component: AfishaComponent },
       ])

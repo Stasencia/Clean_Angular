@@ -12,11 +12,23 @@ using Microsoft.Extensions.Hosting;
 using ANGULARRRR.Converters;
 using Infrastructure.Data;
 using Core.Entities;
+using Core.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Core.Helpers;
+using IdentityServer4.AccessTokenValidation;
+using System.Linq;
+using IdentityServer4.Models;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 namespace ANGULARRRR
 {
     public class Startup
     {
+        private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
+        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,13 +45,34 @@ namespace ANGULARRRR
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders(); ;
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
+                    {
+                        var apiResource = options.ApiResources.First();
+                        apiResource.UserClaims = new[] { "role" };
+
+                        var identityResource = new IdentityResource
+                        {
+                            Name = "customprofile",
+                            DisplayName = "Custom profile",
+                            UserClaims = new[] { "role" },
+                        };
+                        identityResource.Properties.Add(ApplicationProfilesPropertyNames.Clients, "*");
+                        options.IdentityResources.Add(identityResource);
+                    });
 
             services.AddAuthentication()
-                .AddIdentityServerJwt();
+                 .AddIdentityServerJwt();
+
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("OnlyAdminAccess", policy => policy.RequireRole("Admin"));
+            });*/
+
+
             services.AddControllersWithViews();
             services.AddControllers()
             .AddJsonOptions(options =>
@@ -47,13 +80,14 @@ namespace ANGULARRRR
                 options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
                 options.JsonSerializerOptions.Converters.Add(new FileToBinaryArrayConverter());
             });
-            services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
             services.AddMvc();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,9 +115,11 @@ namespace ANGULARRRR
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseIdentityServer();
-            app.UseAuthorization();
             
+            app.UseAuthorization();
+
+            app.UseIdentityServer();
+
             app.UseEndpoints(endpoints =>
              {
                  endpoints.MapControllerRoute(

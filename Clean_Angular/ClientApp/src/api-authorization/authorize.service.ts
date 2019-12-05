@@ -3,6 +3,7 @@ import { User, UserManager, WebStorageStateStore } from 'oidc-client';
 import { BehaviorSubject, concat, from, Observable } from 'rxjs';
 import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { ApplicationPaths, ApplicationName } from './api-authorization.constants';
+import { element } from 'protractor';
 
 export type IAuthenticationResult =
   SuccessAuthenticationResult |
@@ -30,7 +31,8 @@ export enum AuthenticationResultStatus {
 }
 
 export interface IUser {
-  name: string;
+    name: string;
+    role: string[];
 }
 
 @Injectable({
@@ -42,7 +44,7 @@ export class AuthorizeService {
 
   private popUpDisabled = true;
   private userManager: UserManager;
-  private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject(null);
+    private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject(null);
 
     public isAuthenticated(): Observable<boolean> {
         /*var x: Observable<string> = this.getUser().pipe(map(u => u.name));
@@ -54,6 +56,13 @@ export class AuthorizeService {
                 map(u => u && u.profile));*/
 
         return this.getUser().pipe(map(u => !!u));
+    }
+
+    public getRoles() : Observable<string[]>{
+        return from(this.ensureUserManagerInitialized())
+            .pipe(
+                mergeMap(() => this.userManager.getUser()),
+                map(u => u.profile.role as Array<string>));
     }
 
   public getUser(): Observable<IUser | null> {
