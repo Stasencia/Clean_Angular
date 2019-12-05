@@ -16,6 +16,10 @@ export class AfishaService {
         return this.http.get(this.url + this.AfishaQueryString(filter));
     }
 
+    getTheatricalEvent(id: number) {
+        return this.http.get(this.url + '/' + id);
+    }
+
     AfishaQueryString(obj: any) {
         var parts = [];
         for (var property in obj) {

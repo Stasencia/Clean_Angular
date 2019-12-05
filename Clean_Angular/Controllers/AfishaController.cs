@@ -42,10 +42,14 @@ namespace ANGULARRRR.Controllers
         }
 
         [HttpGet("{id}")]
-        public TheatricalEvent Get(int id)
+        public ScheduledEventDTO Get(int id)
         {
             TheatricalEvent theatricalEvent = db.TheatricalEvents.FirstOrDefault(x => x.Id == id);
-            return theatricalEvent;
+            ScheduledEventDTO scheduledEventDTO = new ScheduledEventDTO();
+            scheduledEventDTO.TheatricalEvent = theatricalEvent;
+            var scheduledEvents = db.ScheduledEvents.Where(x => x.TheatricalEventId == id);
+            scheduledEventDTO.Dates = scheduledEvents.Select(se => se.Date).ToArray();
+            return scheduledEventDTO;
         }
     }
 }
