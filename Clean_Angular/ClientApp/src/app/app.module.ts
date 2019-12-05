@@ -22,6 +22,7 @@ import { AfishaComponent } from './afisha/afisha.component';
 import { MultiDatePickerComponent } from './multi-date-picker/multi-date-picker.component';
 import { AdminAfishaScheduleComponent } from './admin-afisha-schedule/admin-afisha-schedule.component';
 import { TheatricaleventDetailsComponent } from './theatricalevent-details/theatricalevent-details.component';
+import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TheatricaleventDetailsComponent } from './theatricalevent-details/theat
       AfishaComponent,
       MultiDatePickerComponent,
       AdminAfishaScheduleComponent,
-      TheatricaleventDetailsComponent
+      TheatricaleventDetailsComponent,
+      TicketPurchaseComponent
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,6 +57,7 @@ import { TheatricaleventDetailsComponent } from './theatricalevent-details/theat
           { path: 'admin-afisha/schedule/:id', component: AdminAfishaScheduleComponent },
           { path: 'afisha', component: AfishaComponent },
           { path: 'afisha/:id', component: TheatricaleventDetailsComponent },
+          { path: 'ticket-purchase/:id', component: TicketPurchaseComponent },
       ])
   ],
   providers: [

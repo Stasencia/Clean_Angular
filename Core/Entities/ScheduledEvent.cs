@@ -10,5 +10,6 @@ namespace Core.Entities
         public int TheatricalEventId { get; set; }
         public TheatricalEvent TheatricalEvent { get; set; }
         public DateTime Date { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

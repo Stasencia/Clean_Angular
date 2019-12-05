@@ -43,7 +43,7 @@ export class TheatricaleventDetailsComponent implements OnInit {
         else if (!(this.datesSelected.findIndex(f => f.day == this.dateSelected.day && f.month == this.dateSelected.month && f.year == this.dateSelected.year) >= 0))
             alert("Выберите одну из указанных дат. В выбранную вами дату нет представлений.");
         else
-            this.router.navigate(['/afisha']);
+            this.router.navigate(['/ticket-purchase', this.event.id, '?date=', this.dateSelected]);
     }
 
     ngOnInit() {
