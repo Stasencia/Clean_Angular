@@ -80,7 +80,7 @@
   </div>
   <div class="form-group">
     <label>Картинка</label>
-    <input type="file" [(ngModel)]="theatricalevent.image" class="form-control">
+    <input #fileInput id="fileInput" type='file' (change)="changeListener($event)" class="form-control" />
   </div>
   <div>
     <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />

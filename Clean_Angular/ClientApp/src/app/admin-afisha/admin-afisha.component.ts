@@ -12,7 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AdminAfishaComponent implements OnInit {
 
-    theatricalevent: TheatricalEvent;
+    theatricalevent: TheatricalEvent = new TheatricalEvent();
     // array of all items to be paged
     theatricalevents: TheatricalEvent[];
     // current page of items
@@ -71,7 +71,7 @@ export class AdminAfishaComponent implements OnInit {
     save() {
         if (this.theatricalevent.id == null) {
             this.dataService.createTheatricalEvent(this.theatricalevent)
-                .subscribe((data: TheatricalEvent) => this.theatricalevents.push(data));
+                .subscribe((data: TheatricalEvent) => { this.theatricalevents.push(data); this.loadTheatricalEvents(); });
         } else {
             this.dataService.updateTheatricalEvent(this.theatricalevent)
                 .subscribe(data => this.loadTheatricalEvents());
@@ -82,7 +82,7 @@ export class AdminAfishaComponent implements OnInit {
         this.theatricalevent = te;
     }
     cancel() {
-        this.theatricalevent = null;
+        this.theatricalevent = new TheatricalEvent();
         this.tableMode = true;
     }
     delete(te: TheatricalEvent) {
