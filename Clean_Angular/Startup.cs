@@ -22,6 +22,7 @@ using IdentityServer4.AccessTokenValidation;
 using System.Linq;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Http;
 
 namespace ANGULARRRR
 {
@@ -71,7 +72,7 @@ namespace ANGULARRRR
             {
                 options.AddPolicy("OnlyAdminAccess", policy => policy.RequireRole("Admin"));
             });*/
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews();
             services.AddControllers()

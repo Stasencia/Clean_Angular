@@ -8,7 +8,8 @@ import { NgbDateStruct, NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng
 @Component({
   selector: 'app-theatricalevent-details',
   templateUrl: './theatricalevent-details.component.html',
-  styleUrls: ['./theatricalevent-details.component.css']
+    styleUrls: ['./theatricalevent-details.component.css'],
+    providers: [AfishaService, DatePipe]
 })
 export class TheatricaleventDetailsComponent implements OnInit {
 
@@ -19,7 +20,8 @@ export class TheatricaleventDetailsComponent implements OnInit {
     datesSelected: NgbDateStruct[] = [];
     dateSelected: NgbDateStruct;
 
-    constructor(private dataService: AfishaService, private route: ActivatedRoute, private router: Router, private calendar: NgbCalendar) {
+    constructor(private dataService: AfishaService, private route: ActivatedRoute,
+        private router: Router, private calendar: NgbCalendar, public datepipe: DatePipe) {
         route.params.subscribe(p => {
             this.event.id = +p['id'];
         }, err => {
@@ -42,8 +44,12 @@ export class TheatricaleventDetailsComponent implements OnInit {
             alert("Выберите подходящую дату.");
         else if (!(this.datesSelected.findIndex(f => f.day == this.dateSelected.day && f.month == this.dateSelected.month && f.year == this.dateSelected.year) >= 0))
             alert("Выберите одну из указанных дат. В выбранную вами дату нет представлений.");
-        else
-            this.router.navigate(['/ticket-purchase', this.event.id, '?date=', this.dateSelected]);
+        else {
+            var date = new Date(this.dateSelected.year, this.dateSelected.month - 1, this.dateSelected.day);
+            var s = '?' + encodeURIComponent("date") + '=' + encodeURIComponent(this.datepipe.transform(date, "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"));
+            //var s = '/ticket-purchase/' + this.event.id;
+            this.router.navigate(['/ticket-purchase', this.event.id], { queryParams: { date: encodeURIComponent(this.datepipe.transform(date, "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ")) } });
+        }
     }
 
     ngOnInit() {
