@@ -31,20 +31,8 @@ namespace ANGULARRRR.Controllers
             Ticket ticket = new Ticket()
             {
                 User = await _userManager.FindByIdAsync(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value),
-                //ScheduledEvent = db.ScheduledEvents.FirstOrDefault(x => x.TheatricalEventId == id && x.Date == date)
+                ScheduledEvent = db.ScheduledEvents.FirstOrDefault(x => x.TheatricalEventId == id && x.Date == date)
             };
-            /*List<ScheduledEventDTO> result = new List<ScheduledEventDTO>();
-            var theatricalevents = db.TheatricalEvents;
-
-            foreach (TheatricalEvent te in theatricalevents)
-            {
-                ScheduledEventDTO scheduledEventDTO = new ScheduledEventDTO();
-                scheduledEventDTO.TheatricalEvent = te;
-                var scheduledEvents = db.ScheduledEvents.Where(x => x.TheatricalEventId == te.Id);
-                scheduledEventDTO.Dates = dateFilter.FilterRange(scheduledEvents.Select(se => se.Date).ToList());
-                if (scheduledEventDTO.Dates.Any())
-                    result.Add(scheduledEventDTO);
-            }*/
 
             return ticket;
         }
