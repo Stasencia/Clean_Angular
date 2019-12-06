@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
@@ -31,7 +30,6 @@ import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.compo
       NavMenuComponent,
       JwPaginationComponent,
       HomeComponent,
-      CounterComponent,
       FetchDataComponent,
       AdminAfishaComponent,
       AfishaComponent,
@@ -51,7 +49,6 @@ import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.compo
       ApiAuthorizationModule,
       RouterModule.forRoot([
           { path: '', component: HomeComponent, pathMatch: 'full' },
-          { path: 'counter', component: CounterComponent },
           { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
           { path: 'admin-afisha', component: AdminAfishaComponent, canActivate: [AuthorizeGuard], data: {permittedRoles: ["Administrator"]} },
           { path: 'admin-afisha/schedule/:id', component: AdminAfishaScheduleComponent },

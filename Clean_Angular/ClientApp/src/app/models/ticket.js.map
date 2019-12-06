@@ -1,1 +1,1 @@
-{"version":3,"file":"ticket.js","sourceRoot":"","sources":["ticket.ts"],"names":[],"mappings":";;AAEA;IACI,gBACW,EAAW,EACX,eAAgC,EAChC,KAAc;QAFd,OAAE,GAAF,EAAE,CAAS;QACX,oBAAe,GAAf,eAAe,CAAiB;QAChC,UAAK,GAAL,KAAK,CAAS;IACrB,CAAC;IACT,aAAC;AAAD,CAAC,AAND,IAMC;AANY,wBAAM"}
+{"version":3,"file":"ticket.js","sourceRoot":"","sources":["ticket.ts"],"names":[],"mappings":";;AAEA;IACI,gBACW,EAAW,EACX,cAA+B;QAD/B,OAAE,GAAF,EAAE,CAAS;QACX,mBAAc,GAAd,cAAc,CAAiB;IACtC,CAAC;IACT,aAAC;AAAD,CAAC,AALD,IAKC;AALY,wBAAM"}

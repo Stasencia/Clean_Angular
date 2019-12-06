@@ -1,1 +1,17 @@
-<p>ticket-purchase works!</p>
+<h1>Заказ билета</h1>
+<h3>Билет на представление {{ticket?.scheduledEvent?.theatricalEvent?.name}}</h3>
+<h3>Дата проведения: {{ticket?.scheduledEvent?.dates}}</h3>
+<h3>Выберите место: </h3>
+<div *ngFor="let r of seats.row">
+  {{r}}
+  <button style="margin:5px" *ngFor="let p of seats.place" (click)="seatClicked(r,p)" type="button" class="btn btn-primary btn-circle">
+    {{p}}
+  </button>
+</div>
+<button class="btn btn-primary" >Купить</button>
+<div *ngFor="let r of chosenSeats.row">
+  {{r}}
+  <button style="margin:5px" *ngFor="let p of chosenSeats.place" type="button" class="btn btn-primary btn-circle">
+    {{p}}
+  </button>
+</div>

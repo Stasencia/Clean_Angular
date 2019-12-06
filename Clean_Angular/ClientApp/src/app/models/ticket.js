@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Ticket = /** @class */ (function () {
-    function Ticket(id, theatricalEvent, dates) {
+    function Ticket(id, scheduledEvent) {
         this.id = id;
-        this.theatricalEvent = theatricalEvent;
-        this.dates = dates;
+        this.scheduledEvent = scheduledEvent;
     }
     return Ticket;
 }());

@@ -17,6 +17,14 @@ export class TicketPurchaseComponent implements OnInit {
         id: 0,
         date: new Date()
     };
+    seats = {
+        row: [1,2,3],
+        place: [1,2,3,4,5]
+    }
+    chosenSeats = {
+        row: [],
+        place: []
+    }
 
     constructor(private dataService: TicketPurchaseService, private route: ActivatedRoute,
         private router: Router) { 
@@ -33,6 +41,13 @@ export class TicketPurchaseComponent implements OnInit {
 
     ngOnInit() {
         this.loadTicket(this.event.id, this.event.date);
+    }
+
+    seatClicked(row: number, place: number) {
+        if (this.chosenSeats.row.indexOf(row) < 0 || this.chosenSeats.place.indexOf(place) < 0) {
+            this.chosenSeats.row.push(row);
+            this.chosenSeats.place.push(place);
+        }
     }
 
     loadTicket(id: number, date: any) {
